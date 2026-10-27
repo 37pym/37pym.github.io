@@ -98,7 +98,7 @@ body {
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip; /* hidden だと body がスクロール要素になりスナップ等が無効化されるため clip */
 }
 
 h1, h2, h3, h4, p { margin: 0; }
@@ -806,7 +806,6 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  html { scroll-snap-type: none; } /* スナップは酔いやすいので無効化 */
   .reveal { opacity: 1; transform: none; }
   .tagline__word { color: var(--text); }
   .mcol { animation: none !important; }
@@ -820,8 +819,14 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
   --stack-peek: 14px;
   display: flex;
   flex-direction: column;
-  /* 下余白。最後のカードもここまで固定され、一拍止まってから次セクションへ送られる */
-  padding-bottom: clamp(240px, 36vh, 420px);
+}
+/* 末尾スペーサー: content box を伸ばし、最後のカードも固定されて一拍止まってから次へ
+   （padding は sticky の固定範囲に含まれないため、要素で伸ばす必要がある） */
+.stack::after {
+  content: "";
+  display: block;
+  flex: none;
+  height: clamp(240px, 40vh, 480px);
 }
 .stack__card {
   position: sticky;
