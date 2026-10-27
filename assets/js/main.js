@@ -25,6 +25,63 @@
     });
   }
 
+  /* --- Section pin + scrub: セクションを固定して中身をスクロール --- */
+  if (!reduceMotion) {
+    const pinSecs = Array.prototype.slice.call(document.querySelectorAll("section.pin"));
+    const pinItems = [];
+    pinSecs.forEach(function (sec) {
+      const vp = document.createElement("div");
+      vp.className = "pin__vp";
+      const tr = document.createElement("div");
+      const keep = sec.className.split(/\s+/).filter(function (c) {
+        return c && c !== "pin" && c !== "reveal"; // revealはtransform衝突するため外す
+      });
+      tr.className = "pin__tr " + keep.join(" ");
+      while (sec.firstChild) tr.appendChild(sec.firstChild);
+      vp.appendChild(tr);
+      sec.appendChild(vp);
+      sec.className = "pin"; // 外枠はスペーサーのみ（idは保持＝アンカー用）
+      pinItems.push({ sec: sec, vp: vp, tr: tr, scrollable: 0 });
+    });
+
+    if (pinItems.length) {
+      let pinTick = false;
+      const pinScroll = function () {
+        pinTick = false;
+        pinItems.forEach(function (it) {
+          if (it.scrollable <= 0) {
+            it.tr.style.transform = "none";
+            return;
+          }
+          let p = -it.sec.getBoundingClientRect().top / it.scrollable;
+          if (p < 0) p = 0;
+          if (p > 1) p = 1;
+          it.tr.style.transform = "translateY(" + (-p * it.scrollable).toFixed(2) + "px)";
+        });
+      };
+      const pinLayout = function () {
+        const vh = window.innerHeight;
+        pinItems.forEach(function (it) {
+          it.vp.style.height = vh + "px";
+          it.tr.style.transform = "none";
+          it.scrollable = Math.max(0, it.tr.offsetHeight - vh);
+          it.sec.style.height = vh + it.scrollable + "px";
+        });
+        pinScroll();
+      };
+      const pinReq = function () {
+        if (!pinTick) {
+          pinTick = true;
+          requestAnimationFrame(pinScroll);
+        }
+      };
+      window.addEventListener("scroll", pinReq, { passive: true });
+      window.addEventListener("resize", pinLayout, { passive: true });
+      window.addEventListener("load", pinLayout); // 画像・フォント確定後に再計測
+      pinLayout();
+    }
+  }
+
   /* --- Navigation toggle (mobile) --- */
   const nav = document.querySelector("[data-nav]");
   if (nav) {

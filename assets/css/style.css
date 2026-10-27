@@ -62,7 +62,6 @@
   --maxw: 1120px;
   --read: 680px;      /* hero heading / subhead max width (B5) */
   --gutter: 16px;
-  --pin-top: 84px;    /* セクション見出しの固定位置（フローティングナビの下） */
 }
 
 /* =========================================================
@@ -84,6 +83,21 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* ============ セクション固定＋中身スクラブ（JSが制御） ============ */
+.pin { position: relative; }
+.pin__vp {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+.pin__tr { will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  /* JS不介入＝通常フロー。保険として解除 */
+  .pin__vp { position: static; height: auto; overflow: visible; }
+  .pin__tr { transform: none !important; }
 }
 
 body {
@@ -321,16 +335,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   z-index: -1;
 }
 
-.section__head {
-  position: sticky;
-  top: var(--pin-top);
-  z-index: 2;
-  background: var(--bg);
-  padding-top: var(--space-400);
-  padding-bottom: var(--space-300);
-  margin-bottom: var(--space-400);
-}
-.section--band .section__head { background: var(--band); }
+.section__head { margin-bottom: var(--space-600); }
 .section__title {
   font-size: var(--text-3xl);
   line-height: var(--lh-3xl);
