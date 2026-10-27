@@ -67,7 +67,11 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;          /* アンカー遷移を滑らかに */
+  scroll-padding-top: var(--space-900); /* 固定ナビ分のオフセット */
+}
 
 body {
   margin: 0;
@@ -707,6 +711,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   --stack-peek: 14px;
   display: flex;
   flex-direction: column;
+  /* 下余白。最後のカードもここまで固定され、一拍止まってから次セクションへ送られる */
+  padding-bottom: clamp(240px, 36vh, 420px);
 }
 .stack__card {
   position: sticky;
