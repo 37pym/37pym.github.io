@@ -492,6 +492,7 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
 }
 .about__body p + p { margin-top: var(--space-300); }
 .about__career { margin-top: var(--space-500); }
+.about__actions { margin-top: var(--space-500); }
 .about__career h3 {
   font-size: var(--text-sm);
   line-height: var(--lh-sm);
