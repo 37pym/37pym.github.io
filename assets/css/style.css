@@ -62,6 +62,7 @@
   --maxw: 1120px;
   --read: 680px;      /* hero heading / subhead max width (B5) */
   --gutter: 16px;
+  --pin-top: 84px;    /* セクション見出しの固定位置（フローティングナビの下） */
 }
 
 /* =========================================================
@@ -75,11 +76,8 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;          /* アンカー遷移を滑らかに */
   scroll-padding-top: var(--space-900); /* 固定ナビ分のオフセット */
-  scroll-snap-type: y proximity;    /* セクションごとにスナップ（緩め） */
 }
 
-/* スナップ対象セクション */
-.snap { scroll-snap-align: start; }
 /* 短いセクションは1画面いっぱい＋中央寄せ */
 .snap--full {
   min-height: 100svh;
@@ -323,7 +321,16 @@ ul { margin: 0; padding: 0; list-style: none; }
   z-index: -1;
 }
 
-.section__head { margin-bottom: var(--space-600); }
+.section__head {
+  position: sticky;
+  top: var(--pin-top);
+  z-index: 2;
+  background: var(--bg);
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-300);
+  margin-bottom: var(--space-400);
+}
+.section--band .section__head { background: var(--band); }
 .section__title {
   font-size: var(--text-3xl);
   line-height: var(--lh-3xl);
