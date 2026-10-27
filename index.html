@@ -8,6 +8,14 @@
 <title>37pym portfolio</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
+<script>
+  /* 描画前に intro 状態を付与（モーション無効設定時はスキップ） */
+  try {
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.className += " intro";
+    }
+  } catch (e) {}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">本文へスキップ</a>
@@ -35,16 +43,46 @@
 
   <!-- ============ Hero / メインビジュアル ============ -->
   <section class="hero container snap" aria-labelledby="hero-title">
-    <p class="eyebrow hero__eyebrow">UI / UX Designer</p>
-    <h1 class="hero__title" id="hero-title">〔ここにキャッチコピー。<br>あなたが何者で、何をする人か〕</h1>
-    <p class="hero__sub placeholder">〔ここにサブコピー。どんな価値を届けられるかを1〜2文で〕</p>
-    <div class="hero__actions">
-      <a class="btn btn--primary" href="#works">取り組みを見る</a>
-      <a class="btn btn--ghost" href="#contact">連絡する</a>
+    <div class="hero__text">
+      <p class="eyebrow hero__eyebrow">UI / UX Designer</p>
+      <h1 class="hero__title" id="hero-title">
+        <span class="ln"><span>〔見出し1行目〕</span></span>
+        <span class="ln"><span>〔見出し2行目〕</span></span>
+        <span class="ln"><span>〔見出し3行目〕</span></span>
+      </h1>
+      <p class="hero__sub placeholder">〔ここにサブコピー。どんな価値を届けられるかを1〜2文で〕</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#works">取り組みを見る</a>
+        <a class="btn btn--ghost" href="#contact">連絡する</a>
+      </div>
+      <p class="hero__proof">〔ここに実績の一言サマリ（例：○年の経験 / 担当領域）〕</p>
     </div>
-    <p class="hero__proof">〔ここに実績の一言サマリ（例：○年の経験 / 担当領域）〕</p>
-    <div class="hero__visual" role="img" aria-label="メインビジュアル（準備中）">
-      <span class="placeholder">ここにメインビジュアル</span>
+
+    <div class="hero__mosaic" data-mosaic aria-hidden="true">
+      <div class="mcol">
+        <span class="cell cell--img cell--tall">画像</span>
+        <span class="cell cell--g2 cell--sq"></span>
+        <span class="cell cell--g3 cell--tall"></span>
+        <span class="cell cell--g1 cell--sq"></span>
+        <span class="cell cell--img cell--tall">画像</span>
+        <span class="cell cell--g2 cell--sq"></span>
+      </div>
+      <div class="mcol">
+        <span class="cell cell--g3 cell--tall"></span>
+        <span class="cell cell--img cell--sq">画像</span>
+        <span class="cell cell--g1 cell--tall"></span>
+        <span class="cell cell--g2 cell--sq"></span>
+        <span class="cell cell--img cell--tall">画像</span>
+        <span class="cell cell--g3 cell--sq"></span>
+      </div>
+      <div class="mcol">
+        <span class="cell cell--g1 cell--sq"></span>
+        <span class="cell cell--img cell--tall">画像</span>
+        <span class="cell cell--g2 cell--sq"></span>
+        <span class="cell cell--g3 cell--tall"></span>
+        <span class="cell cell--g1 cell--sq"></span>
+        <span class="cell cell--img cell--tall">画像</span>
+      </div>
     </div>
   </section>
 

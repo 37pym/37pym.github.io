@@ -47,6 +47,10 @@
   --surface-2: #f4f4f4;
   --band: #f3f3f3;        /* セクション区別用のグレー帯 */
   --border: #e6e6e6;
+  /* ヒーローモザイクの3種グレー */
+  --tile-1: #e7e7e4;
+  --tile-2: #cbcbc7;
+  --tile-3: #35342f;
   --text: #0a0a0a;
   --text-muted: #666666;
   --text-faint: #9b9b9b;
@@ -338,15 +342,26 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding-bottom: var(--space-800);
 }
 .hero__eyebrow { margin-bottom: var(--space-300); }
+.hero__text { max-width: var(--read); }
+
 .hero__title {
   max-width: var(--read);
   font-size: var(--text-5xl);
-  line-height: 1.05;
+  line-height: 1.04;
   letter-spacing: -0.02em;
+}
+.hero__title .ln {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.04em;
+}
+.hero__title .ln > span {
+  display: inline-block;
   background: linear-gradient(90deg, #000000, #666666);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  transition: transform 0.9s var(--ease);
 }
 .hero__sub {
   max-width: var(--read);
@@ -366,19 +381,100 @@ ul { margin: 0; padding: 0; list-style: none; }
   line-height: var(--lh-sm);
   color: var(--text-faint);
 }
-.hero__visual {
-  margin-top: var(--space-700);
-  aspect-ratio: 16 / 7;
+
+/* Hero mosaic (monochrome, 3-col infinite marquee) */
+.hero__mosaic {
+  --mg: var(--space-100);
+  margin-top: var(--space-600);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mg);
+  height: clamp(320px, 52vh, 480px);
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+.mcol {
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: flex-start; /* 高さは内容分に（translateY -50% ループのため） */
+  display: flex;
+  flex-direction: column;
+  animation: mcolDown 24s linear infinite;
+  will-change: transform;
+}
+.mcol:nth-child(2) { animation-name: mcolUp; animation-duration: 28s; }
+.mcol:nth-child(3) { animation-duration: 26s; }
+@keyframes mcolDown {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+@keyframes mcolUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+.cell {
+  flex: none;
+  margin-bottom: var(--mg); /* 継ぎ目を均一にして -50% ループを連続させる */
+  border-radius: var(--radius-xl);
+}
+.cell--tall { aspect-ratio: 3 / 4; }
+.cell--sq { aspect-ratio: 1 / 1; }
+.cell--g1 { background: var(--tile-1); }
+.cell--g2 { background: var(--tile-2); }
+.cell--g3 { background: var(--tile-3); }
+.cell--img {
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--border);
   display: grid;
   place-items: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-3xl);
+  color: var(--text-faint);
+  font-size: var(--text-xs);
 }
 
-@media (min-width: 900px) {
+/* Hero 2-column on desktop */
+@media (min-width: 960px) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+    gap: var(--space-700);
+    align-items: center;
+    padding-top: calc(var(--space-900) + var(--space-500));
+  }
   .hero__title { font-size: var(--text-6xl); }
+  .hero__mosaic { margin-top: 0; height: clamp(440px, 76vh, 760px); }
 }
+
+/* Hero intro entrance */
+.hero__eyebrow,
+.hero__sub,
+.hero__actions,
+.hero__proof {
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.hero__mosaic { transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.hero__eyebrow { transition-delay: 0.05s; }
+.hero__title .ln:nth-child(1) > span { transition-delay: 0.18s; }
+.hero__title .ln:nth-child(2) > span { transition-delay: 0.26s; }
+.hero__title .ln:nth-child(3) > span { transition-delay: 0.34s; }
+.hero__sub { transition-delay: 0.5s; }
+.hero__actions { transition-delay: 0.6s; }
+.hero__proof { transition-delay: 0.66s; }
+.hero__mosaic { transition-delay: 0.1s; }
+
+html.intro .hero__eyebrow,
+html.intro .hero__sub,
+html.intro .hero__actions,
+html.intro .hero__proof {
+  opacity: 0;
+  transform: translateY(14px);
+}
+html.intro .hero__mosaic {
+  opacity: 0;
+  transform: translateY(18px);
+}
+html.intro .hero__title .ln > span { transform: translateY(110%); }
 
 /* About ----------------------------------------------------- */
 .about__grid {
@@ -713,6 +809,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   html { scroll-snap-type: none; } /* スナップは酔いやすいので無効化 */
   .reveal { opacity: 1; transform: none; }
   .tagline__word { color: var(--text); }
+  .mcol { animation: none !important; }
 }
 
 /* =========================================================

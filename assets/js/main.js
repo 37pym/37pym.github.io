@@ -6,6 +6,25 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* --- Hero mosaic: セルを複製して -50% ループをシームレスに --- */
+  const mosaic = document.querySelector("[data-mosaic]");
+  if (mosaic) {
+    mosaic.querySelectorAll(".mcol").forEach((col) => {
+      Array.prototype.slice.call(col.children).forEach((cell) => {
+        col.appendChild(cell.cloneNode(true));
+      });
+    });
+  }
+
+  /* --- Intro 解除: 一度 hidden 状態を描画してから transition で表示 --- */
+  if (document.documentElement.classList.contains("intro")) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.documentElement.classList.remove("intro");
+      });
+    });
+  }
+
   /* --- Navigation toggle (mobile) --- */
   const nav = document.querySelector("[data-nav]");
   if (nav) {
