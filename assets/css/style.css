@@ -816,8 +816,9 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
    Works — sticky stack (比較用)
    ========================================================= */
 .stack {
-  --stack-top: 112px;
+  --stack-top: 180px;
   --stack-peek: 14px;
+  --n: 8;
   display: flex;
   flex-direction: column;
 }
@@ -831,7 +832,9 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
 }
 .stack__card {
   position: sticky;
-  top: calc(var(--stack-top) + var(--i) * var(--stack-peek));
+  top: var(--stack-top); /* 固定位置は全カード共通＝束が一緒に剥がれてスクロールする */
+  /* 奥のカードほど上にずらし、重なりの端（覗き段差）を見た目だけで作る */
+  transform: translateY(calc((var(--n) - 1 - var(--i)) * var(--stack-peek) * -1));
   transform-origin: center top;
   display: flex;
   flex-direction: column;

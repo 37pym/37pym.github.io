@@ -132,46 +132,4 @@
       bars.forEach((el) => io.observe(el));
     }
   }
-
-  /* --- Works sticky stack: scroll-driven scale (比較用 / B7: rAF スロットル) --- */
-  const stack = document.querySelector("[data-stack]");
-  if (stack && !reduceMotion) {
-    const cards = Array.prototype.slice.call(stack.querySelectorAll(".stack__card"));
-    const N = cards.length;
-    if (N) {
-      const cs = getComputedStyle(stack);
-      const top = parseFloat(cs.getPropertyValue("--stack-top")) || 112;
-      const peek = parseFloat(cs.getPropertyValue("--stack-peek")) || 14;
-      const SHRINK = 0.02; // 1枚あたりの縮小率
-      const RANGE = 420;   // 次カードが覆い被さる距離(px)
-      let ticking = false;
-
-      const update = () => {
-        ticking = false;
-        for (let i = 0; i < N; i++) {
-          if (i === N - 1) {
-            cards[i].style.transform = "scale(1)";
-            continue;
-          }
-          const target = 1 - (N - 1 - i) * SHRINK;
-          const nextTop = cards[i + 1].getBoundingClientRect().top;
-          const pinned = top + (i + 1) * peek;
-          let p = 1 - (nextTop - pinned) / RANGE;
-          if (p < 0) p = 0;
-          if (p > 1) p = 1;
-          const scale = 1 - p * (1 - target);
-          cards[i].style.transform = "scale(" + scale.toFixed(4) + ")";
-        }
-      };
-      const onScroll = () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(update);
-        }
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll, { passive: true });
-      update();
-    }
-  }
 })();
