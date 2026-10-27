@@ -71,6 +71,17 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;          /* アンカー遷移を滑らかに */
   scroll-padding-top: var(--space-900); /* 固定ナビ分のオフセット */
+  scroll-snap-type: y proximity;    /* セクションごとにスナップ（緩め） */
+}
+
+/* スナップ対象セクション */
+.snap { scroll-snap-align: start; }
+/* 短いセクションは1画面いっぱい＋中央寄せ */
+.snap--full {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 body {
@@ -699,6 +710,7 @@ ul { margin: 0; padding: 0; list-style: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  html { scroll-snap-type: none; } /* スナップは酔いやすいので無効化 */
   .reveal { opacity: 1; transform: none; }
   .tagline__word { color: var(--text); }
 }
