@@ -682,3 +682,71 @@ ul { margin: 0; padding: 0; list-style: none; }
   .reveal { opacity: 1; transform: none; }
   .tagline__word { color: var(--text); }
 }
+
+/* =========================================================
+   Works — sticky stack (比較用)
+   ========================================================= */
+.stack {
+  --stack-top: 112px;
+  --stack-peek: 14px;
+  display: flex;
+  flex-direction: column;
+}
+.stack__card {
+  position: sticky;
+  top: calc(var(--stack-top) + var(--i) * var(--stack-peek));
+  transform-origin: center top;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-300);
+  min-height: clamp(300px, 52vh, 440px);
+  padding: var(--space-400);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-3xl);
+  will-change: transform;
+}
+.stack__card + .stack__card { margin-top: var(--space-400); }
+.stack__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+}
+.stack__num {
+  font-family: "Geist Mono", monospace;
+  font-size: var(--text-4xl);
+  line-height: 1;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+.stack__meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-75);
+  min-width: 0;
+}
+.stack__title {
+  font-size: var(--text-2xl);
+  line-height: var(--lh-2xl);
+  letter-spacing: -0.01em;
+}
+.stack__head .tag { align-self: flex-start; }
+.stack__head .btn { flex-shrink: 0; }
+.stack__thumb {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  border-radius: var(--radius-xl);
+}
+@media (min-width: 720px) {
+  .stack__num { font-size: var(--text-6xl); }
+}
+@media (max-width: 560px) {
+  .stack__head { flex-wrap: wrap; }
+  .stack__head .btn { order: 3; width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stack__card { transform: none !important; }
+}
