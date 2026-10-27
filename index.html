@@ -4,9 +4,204 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
+<meta name="description" content="37pym — UI/UX デザイナーのポートフォリオ。">
 <title>37pym portfolio</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-ここに中身
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<!-- ============ Navigation ============ -->
+<header class="nav" data-nav>
+  <div class="nav__inner">
+    <a class="nav__brand" href="index.html">37pym</a>
+    <button class="nav__toggle" type="button" data-nav-toggle aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-panel">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav__panel" id="nav-panel">
+      <nav class="nav__links" aria-label="メインナビゲーション">
+        <span class="nav__item"><a href="#about">About</a></span>
+        <span class="nav__item"><a href="#works">Works</a></span>
+        <span class="nav__item"><a href="profile.html">Profile</a></span>
+        <span class="nav__item"><a href="#contact">Contact</a></span>
+      </nav>
+      <span class="nav__item nav__cta"><a class="btn btn--primary btn--sm" href="#works">取り組みを見る</a></span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero / メインビジュアル ============ -->
+  <section class="hero container" aria-labelledby="hero-title">
+    <p class="eyebrow hero__eyebrow">UI / UX Designer</p>
+    <h1 class="hero__title" id="hero-title">〔ここにキャッチコピー。<br>あなたが何者で、何をする人か〕</h1>
+    <p class="hero__sub placeholder">〔ここにサブコピー。どんな価値を届けられるかを1〜2文で〕</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#works">取り組みを見る</a>
+      <a class="btn btn--ghost" href="#contact">連絡する</a>
+    </div>
+    <p class="hero__proof">〔ここに実績の一言サマリ（例：○年の経験 / 担当領域）〕</p>
+    <div class="hero__visual" role="img" aria-label="メインビジュアル（準備中）">
+      <span class="placeholder">ここにメインビジュアル</span>
+    </div>
+  </section>
+
+  <!-- ============ About / ユーザーについて ============ -->
+  <section class="section container reveal" id="about" aria-labelledby="about-title">
+    <div class="section__head">
+      <p class="eyebrow">About</p>
+      <h2 class="section__title" id="about-title">ユーザーについて</h2>
+    </div>
+    <div class="about__grid">
+      <div class="about__illust" role="img" aria-label="イメージイラスト（準備中）">
+        <span class="placeholder">ここにイメージイラスト</span>
+      </div>
+      <div class="about__body">
+        <p class="placeholder">〔ここに自己紹介。どんなデザイナーか、大切にしていること〕</p>
+        <p class="placeholder">〔ここに自己紹介のつづき〕</p>
+
+        <div class="about__career">
+          <h3>キャリア経歴</h3>
+          <div class="timeline">
+            <div class="timeline__item">
+              <span class="timeline__when">〔年〕</span>
+              <span class="timeline__what placeholder">ここに経歴</span>
+            </div>
+            <div class="timeline__item">
+              <span class="timeline__when">〔年〕</span>
+              <span class="timeline__what placeholder">ここに経歴</span>
+            </div>
+            <div class="timeline__item">
+              <span class="timeline__when">〔年〕</span>
+              <span class="timeline__what placeholder">ここに経歴</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Tagline reveal (B11) ============ -->
+  <section class="tagline container reveal" aria-label="メッセージ">
+    <p class="tagline__text" data-tagline>〔ここにタグライン。2行以上。あなたの提供価値を一言で〕</p>
+  </section>
+
+  <!-- ============ Works / 取り組み紹介（メイン） ============ -->
+  <section class="section container reveal" id="works" aria-labelledby="works-title">
+    <div class="section__head">
+      <p class="eyebrow">Works</p>
+      <h2 class="section__title" id="works-title">取り組み紹介</h2>
+      <p class="section__lead placeholder">〔ここに取り組み紹介のリード文〕</p>
+    </div>
+
+    <!-- プロダクト -->
+    <div class="works__group">
+      <h3 class="works__grouptitle">プロダクト</h3>
+      <div class="cards">
+        <a class="card" href="works/top-renewal.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">TOP改修</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="card" href="works/design-system.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">デザインシステム</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="card" href="works/onboarding.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">定着・オンボーディング改修</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="card" href="works/currency-coupon.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">課金UU・Currency・クーポン改修</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="card" href="works/sass-update.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">Sassアップデート</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- その他活動 -->
+    <div class="works__group">
+      <h3 class="works__grouptitle">その他活動</h3>
+      <div class="cards">
+        <a class="card" href="works/ai.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">AI活用事例</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="card" href="works/user-research.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">ユーザーリサーチ</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="card" href="works/web-basics.html">
+          <span class="card__thumb"><span class="placeholder">thumb</span></span>
+          <span class="card__title">web基礎</span>
+          <span class="card__desc placeholder">ここに概要</span>
+          <span class="card__more">詳しく見る
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Final CTA / Contact ============ -->
+  <section class="container reveal" id="contact">
+    <div class="cta">
+      <h2 class="cta__title">〔ここにクロージングの見出し〕</h2>
+      <p class="cta__sub placeholder">〔ここに一言。気軽に連絡してほしい旨など〕</p>
+      <div class="cta__actions">
+        <a class="btn btn--primary" href="mailto:〔ここにメールアドレス〕">連絡する</a>
+        <a class="btn btn--ghost" href="profile.html">プロフィールを見る</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <nav class="footer__links" aria-label="フッターナビゲーション">
+      <a href="#about">About</a>
+      <a href="#works">Works</a>
+      <a href="profile.html">Profile</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="footer__copy">© 2026 37pym</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
