@@ -602,8 +602,6 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
 .cta {
   text-align: center;
   padding: var(--space-900) var(--gutter);
-  background: var(--surface);
-  border-radius: var(--radius-3xl);
 }
 .cta__title {
   font-size: var(--text-3xl);
@@ -622,6 +620,7 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
   gap: var(--space-200);
   margin-top: var(--space-500);
 }
+.cta__actions .btn { min-width: 10rem; }
 
 /* Footer ---------------------------------------------------- */
 .footer {
