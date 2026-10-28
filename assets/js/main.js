@@ -132,4 +132,101 @@
       bars.forEach((el) => io.observe(el));
     }
   }
+
+  /* --- Section pin + scrub (PC 限定・ネイティブスクロール) --- */
+  /* 各セクションの上端が画面上端に達すると固定し、固定中は中身をスクロール量に
+     連動して上へ送る。送り切ると固定が解け、次のセクションが下から上がってくる。
+     スタック版(#works-stack)は自前の position:sticky を持つため対象外（壊さない）。 */
+  const pinMq = window.matchMedia("(min-width: 960px)");
+  let pins = [];
+  let pinBuilt = false;
+  let pinTicking = false;
+
+  function pinMeasure() {
+    const vh = window.innerHeight;
+    pins.forEach((p) => {
+      let extra = p.sec.offsetHeight - vh; // 中身が画面より高い分だけ送る
+      if (extra < 4) extra = 0;            // 1画面に収まるセクションは送らない
+      p.extra = extra;
+      p.track.style.height = vh + extra + "px";
+    });
+  }
+
+  function pinUpdate() {
+    pins.forEach((p) => {
+      let ty = 0;
+      if (p.extra > 0) {
+        let prog = -p.track.getBoundingClientRect().top / p.extra;
+        prog = prog < 0 ? 0 : prog > 1 ? 1 : prog;
+        ty = -(prog * p.extra);
+      }
+      p.sec.style.transform = "translate3d(0," + ty + "px,0)";
+    });
+  }
+
+  function onPinScroll() {
+    if (pinTicking) return;
+    pinTicking = true;
+    requestAnimationFrame(() => {
+      pinUpdate();
+      pinTicking = false;
+    });
+  }
+
+  function buildPins() {
+    if (pinBuilt) return;
+    document.querySelectorAll("#main > section").forEach((sec) => {
+      if (sec.id === "works-stack") return; // 既存 sticky を壊さないため除外
+      const track = document.createElement("div");
+      track.className = "pin";
+      const stage = document.createElement("div");
+      stage.className = "pin__stage";
+      sec.parentNode.insertBefore(track, sec);
+      track.appendChild(stage);
+      stage.appendChild(sec);
+      pins.push({ track, stage, sec, extra: 0 });
+    });
+    pinBuilt = true;
+    pinMeasure();
+    pinUpdate();
+    window.addEventListener("scroll", onPinScroll, { passive: true });
+  }
+
+  function teardownPins() {
+    if (!pinBuilt) return;
+    window.removeEventListener("scroll", onPinScroll);
+    pins.forEach((p) => {
+      p.track.parentNode.insertBefore(p.sec, p.track);
+      p.sec.style.transform = "";
+      p.track.remove();
+    });
+    pins = [];
+    pinBuilt = false;
+  }
+
+  function syncPins() {
+    if (reduceMotion || !pinMq.matches) teardownPins();
+    else buildPins();
+  }
+
+  syncPins();
+  if (pinMq.addEventListener) pinMq.addEventListener("change", syncPins);
+  else if (pinMq.addListener) pinMq.addListener(syncPins);
+
+  let pinResizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(pinResizeTimer);
+    pinResizeTimer = setTimeout(() => {
+      if (pinBuilt) {
+        pinMeasure();
+        pinUpdate();
+      }
+    }, 150);
+  });
+  window.addEventListener("load", () => {
+    if (pinBuilt) {
+      pinMeasure();
+      pinUpdate();
+    }
+  });
 })();
