@@ -75,29 +75,22 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;          /* アンカー遷移を滑らかに */
   scroll-padding-top: var(--space-900); /* 固定ナビ分のオフセット */
+  scroll-snap-type: y mandatory;    /* セクション単位でページ送り */
 }
 
-/* 短いセクションは1画面いっぱい＋中央寄せ */
-.snap--full {
+/* ============ セクションスナップ（1画面ずつ送る） ============ */
+/* .snap を持つセクションの先頭に吸着。各セクションは最低1画面分の高さを確保 */
+.snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;         /* 長いセクションは中をスクロールしてから次へ */
   min-height: 100svh;
+}
+
+/* 短いセクションは中身を中央寄せ */
+.snap--full {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-/* ============ セクション固定＋中身スクラブ（JSが制御） ============ */
-.pin { position: relative; }
-.pin__vp {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  overflow: hidden;
-}
-.pin__tr { will-change: transform; }
-@media (prefers-reduced-motion: reduce) {
-  /* JS不介入＝通常フロー。保険として解除 */
-  .pin__vp { position: static; height: auto; overflow: visible; }
-  .pin__tr { transform: none !important; }
 }
 
 body {
