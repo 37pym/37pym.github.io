@@ -531,27 +531,6 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
   .about__grid { grid-template-columns: 360px 1fr; align-items: start; }
 }
 
-/* Tagline reveal (B11) ------------------------------------- */
-.tagline { padding-block: var(--space-900); }
-.tagline__text {
-  max-width: var(--read);
-  margin-inline: auto;
-  font-size: var(--text-4xl);
-  line-height: 1.2;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: -0.01em;
-}
-.tagline__word {
-  color: rgba(10, 10, 10, 0.3);
-  transition: color 0.6s var(--ease);
-}
-.tagline__word.is-on { color: var(--text); }
-
-@media (min-width: 900px) {
-  .tagline__text { font-size: var(--text-5xl); line-height: 1.15; }
-}
-
 /* Works ----------------------------------------------------- */
 .works__group + .works__group { margin-top: var(--space-800); }
 .works__grouptitle {
@@ -820,7 +799,6 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .tagline__word { color: var(--text); }
   .mcol { animation: none !important; }
 }
 

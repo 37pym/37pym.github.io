@@ -70,44 +70,6 @@
     }
   }
 
-  /* --- Tagline word-by-word reveal (B11) --- */
-  const tagline = document.querySelector("[data-tagline]");
-  if (tagline) {
-    // テキストノードを語単位の span に分解
-    const raw = tagline.textContent;
-    tagline.textContent = "";
-    const frag = document.createDocumentFragment();
-    raw.split(/(\s+)/).forEach((token) => {
-      if (/^\s+$/.test(token)) {
-        frag.appendChild(document.createTextNode(token));
-      } else if (token.length) {
-        const span = document.createElement("span");
-        span.className = "tagline__word";
-        span.textContent = token;
-        frag.appendChild(span);
-      }
-    });
-    tagline.appendChild(frag);
-
-    const words = tagline.querySelectorAll(".tagline__word");
-    if (reduceMotion || !("IntersectionObserver" in window)) {
-      words.forEach((w) => w.classList.add("is-on"));
-    } else {
-      const io = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-on");
-              obs.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 1, rootMargin: "0px 0px -35% 0px" }
-      );
-      words.forEach((w) => io.observe(w));
-    }
-  }
-
   /* --- Bar graphs (profile page) --- */
   const bars = document.querySelectorAll("[data-bar]");
   if (bars.length) {
