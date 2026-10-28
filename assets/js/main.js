@@ -97,8 +97,7 @@
 
   /* --- Section pin + scrub (PC 限定・ネイティブスクロール) --- */
   /* 各セクションの上端が画面上端に達すると固定し、固定中は中身をスクロール量に
-     連動して上へ送る。送り切ると固定が解け、次のセクションが下から上がってくる。
-     スタック版(#works-stack)は自前の position:sticky を持つため対象外（壊さない）。 */
+     連動して上へ送る。送り切ると固定が解け、次のセクションが下から上がってくる。 */
   const pinMq = window.matchMedia("(min-width: 960px)");
   let pins = [];
   let pinBuilt = false;
@@ -138,7 +137,6 @@
   function buildPins() {
     if (pinBuilt) return;
     document.querySelectorAll("#main > section").forEach((sec) => {
-      if (sec.id === "works-stack") return; // 既存 sticky を壊さないため除外
       const track = document.createElement("div");
       track.className = "pin";
       const stage = document.createElement("div");

@@ -101,8 +101,7 @@ html {
 
 /* ============ セクション固定＋送り（JS が .pin / .pin__stage を生成） ============ */
 /* .pin: スクロール距離を確保するトラック。.pin__stage: 画面に貼り付く枠。
-   中身（section）を JS が transform で上へ送り、送り切ると固定が解けて次へ。
-   スタック版(#works-stack)は自前の sticky を持つため JS 側で対象外にしている。 */
+   中身（section）を JS が transform で上へ送り、送り切ると固定が解けて次へ。 */
 .pin { position: relative; }
 .pin__stage {
   position: sticky;
@@ -803,83 +802,4 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
   }
   .reveal { opacity: 1; transform: none; }
   .mcol { animation: none !important; }
-}
-
-/* =========================================================
-   Works — sticky stack (比較用)
-   ========================================================= */
-.stack {
-  --stack-top: 180px;
-  --stack-peek: 14px;
-  --n: 8;
-  display: flex;
-  flex-direction: column;
-}
-/* 末尾スペーサー: content box を伸ばし、最後のカードも固定されて一拍止まってから次へ
-   （padding は sticky の固定範囲に含まれないため、要素で伸ばす必要がある） */
-.stack::after {
-  content: "";
-  display: block;
-  flex: none;
-  height: clamp(240px, 40vh, 480px);
-}
-.stack__card {
-  position: sticky;
-  top: var(--stack-top); /* 固定位置は全カード共通＝束が一緒に剥がれてスクロールする */
-  /* 奥のカードほど上にずらし、重なりの端（覗き段差）を見た目だけで作る */
-  transform: translateY(calc((var(--n) - 1 - var(--i)) * var(--stack-peek) * -1));
-  transform-origin: center top;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-300);
-  min-height: clamp(300px, 52vh, 440px);
-  padding: var(--space-400);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-3xl);
-  will-change: transform;
-}
-.stack__card + .stack__card { margin-top: var(--space-400); }
-.stack__head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-300);
-}
-.stack__num {
-  font-family: "Geist Mono", monospace;
-  font-size: var(--text-4xl);
-  line-height: 1;
-  font-weight: 500;
-  color: var(--text-faint);
-}
-.stack__meta {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-75);
-  min-width: 0;
-}
-.stack__title {
-  font-size: var(--text-2xl);
-  line-height: var(--lh-2xl);
-  letter-spacing: -0.01em;
-}
-.stack__head .tag { align-self: flex-start; }
-.stack__head .btn { flex-shrink: 0; }
-.stack__thumb {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  background: var(--surface-2);
-  border-radius: var(--radius-xl);
-}
-@media (min-width: 720px) {
-  .stack__num { font-size: var(--text-6xl); }
-}
-@media (max-width: 560px) {
-  .stack__head { flex-wrap: wrap; }
-  .stack__head .btn { order: 3; width: 100%; justify-content: center; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .stack__card { transform: none !important; }
 }
