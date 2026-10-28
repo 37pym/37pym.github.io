@@ -508,6 +508,7 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
   border-radius: var(--radius-2xl);
 }
 .about__body p + p { margin-top: var(--space-300); }
+.about__name { color: var(--text); }
 .about__career { margin-top: var(--space-500); }
 .about__actions { margin-top: var(--space-500); }
 .about__career h3 {
@@ -612,6 +613,7 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
   max-width: var(--read);
   margin-inline: auto;
 }
+.cta__email { color: var(--text); }
 .cta__actions {
   display: flex;
   flex-wrap: wrap;
@@ -625,7 +627,6 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
 .footer {
   padding-block: var(--space-700) var(--space-500);
   border-top: 1px solid var(--border);
-  margin-top: var(--space-900);
 }
 .footer__inner {
   display: flex;
