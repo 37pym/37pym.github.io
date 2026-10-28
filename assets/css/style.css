@@ -540,8 +540,8 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
 /* Works ----------------------------------------------------- */
 .works__group + .works__group { margin-top: var(--space-800); }
 .works__grouptitle {
-  font-size: var(--text-sm);
-  line-height: var(--lh-sm);
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
   color: var(--text-faint);
   margin-bottom: var(--space-300);
 }
@@ -558,16 +558,14 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
   flex-direction: column;
   gap: var(--space-200);
   padding: var(--space-400);
-  background: var(--surface);
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--radius-2xl);
-  transition: transform 0.5s var(--ease), border-color 0.3s var(--ease),
-    background-color 0.3s var(--ease);
+  transition: transform 0.5s var(--ease), border-color 0.3s var(--ease);
 }
 .card:hover {
   transform: translateY(-4px);
   border-color: #d4d4d4;
-  background: #ffffff;
 }
 .card__thumb {
   aspect-ratio: 16 / 9;
