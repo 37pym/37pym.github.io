@@ -41,16 +41,22 @@
   --radius-3xl: 24px;
   --radius-full: 9999px;
 
+  /* --- Brand palette --- */
+  --primary: #1245ff;
+  --accent: #ffb434;
+  --secondary: #d5e2e7;
+  --base: #f7f7f7;
+
   /* --- Color (light theme) --- */
-  --bg: #ffffff;
+  --bg: var(--base);      /* 全体の背景 */
   --surface: #fafafa;
   --surface-2: #f4f4f4;
-  --band: #f3f3f3;        /* セクション区別用のグレー帯 */
+  --band: var(--secondary);  /* セクション区別用の帯 */
   --border: #e6e6e6;
-  /* ヒーローモザイクの3種グレー */
-  --tile-1: #e7e7e4;
-  --tile-2: #cbcbc7;
-  --tile-3: #35342f;
+  /* ヒーローモザイクのタイル（ブランドカラー） */
+  --tile-1: var(--secondary);
+  --tile-2: var(--accent);
+  --tile-3: var(--primary);
   --text: #0a0a0a;
   --text-muted: #666666;
   --text-faint: #9b9b9b;
