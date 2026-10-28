@@ -196,8 +196,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .btn--primary { background: var(--text); color: var(--bg); }
 .btn--primary:hover { background: #262626; }
 
-.btn--ghost { background: transparent; color: var(--text); border-color: var(--border); }
-.btn--ghost:hover { background: var(--surface-2); }
+.btn--ghost { background: rgba(255, 255, 255, 0.5); color: var(--text); border-color: var(--border); }
+.btn--ghost:hover { background: #ffffff; }
 
 .btn--sm { font-size: var(--text-sm); line-height: var(--lh-sm); }
 
