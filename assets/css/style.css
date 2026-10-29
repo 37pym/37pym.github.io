@@ -81,14 +81,16 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;          /* アンカー遷移を滑らかに */
   scroll-padding-top: var(--space-900); /* 固定ナビ分のオフセット */
-  scroll-snap-type: none;           /* セクション固定＋送り（JS: .pin）に置き換え */
+  scroll-snap-type: y proximity;    /* 近づいたセクション先頭へ吸着（緩め） */
 }
 
-/* ============ セクションスナップ（1画面ずつ送る） ============ */
-/* .snap を持つセクションの先頭に吸着。各セクションは最低1画面分の高さを確保 */
+/* ============ セクションスナップ（1画面ずつ） ============ */
+/* .snap を持つセクションの先頭に吸着。各セクションは最低1画面分の高さを確保。
+   proximity なので、画面より高いセクションは中を自由にスクロールでき、
+   次の境界に近づいたときだけ吸着する。 */
 .snap {
   scroll-snap-align: start;
-  scroll-snap-stop: normal;         /* 長いセクションは中をスクロールしてから次へ */
+  scroll-snap-stop: normal;
   min-height: 100svh;
 }
 
@@ -98,18 +100,6 @@ html {
   flex-direction: column;
   justify-content: center;
 }
-
-/* ============ セクション固定＋送り（JS が .pin / .pin__stage を生成） ============ */
-/* .pin: スクロール距離を確保するトラック。.pin__stage: 画面に貼り付く枠。
-   中身（section）を JS が transform で上へ送り、送り切ると固定が解けて次へ。 */
-.pin { position: relative; }
-.pin__stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-.pin__stage > section { will-change: transform; }
 
 body {
   margin: 0;
