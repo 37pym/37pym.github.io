@@ -708,6 +708,35 @@ html.intro .hero__title .ln > span { transform: translateY(110%); }
 .detail__body h2:first-child { margin-top: 0; }
 .detail__body p { margin-bottom: var(--space-200); }
 
+/* Pager (前 / 次の制作へ) ---------------------------------- */
+.pager {
+  max-width: var(--read);
+  margin-top: var(--space-800);
+  padding-top: var(--space-500);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: var(--space-200);
+}
+.pager__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: transform 0.5s var(--ease), background-color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+.pager__btn--next { margin-inline-start: auto; }
+.pager__btn:hover { background: #ffffff; border-color: #d4d4d4; }
+.pager__btn--prev:hover { transform: translateX(-4px); }
+.pager__btn--next:hover { transform: translateX(4px); }
+.pager__btn:active { transform: scale(0.98); }
+.pager__btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
 /* =========================================================
    Profile page
    ========================================================= */
